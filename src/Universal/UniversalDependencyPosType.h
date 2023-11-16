@@ -6,7 +6,7 @@
 #define DEPENDENCYPARSER_UNIVERSALDEPENDENCYPOSTYPE_H
 
 enum universal_dependency_pos_type{
-    ADJ, ADV, INTJ, NOUN, PROPN, VERB, ADP, AUX_POS, CCONJ, DET_POS, NUM, PART, PRON, SCONJ, PUNCT_POS, SYM, X
+    ADJ, ADV, INTJ, NOUN, PROPN, VERB_POS, ADP, AUX_POS, CCONJ, DET_POS, NUM, PART, PRON, SCONJ, PUNCT_POS, SYM, X
 };
 
 typedef enum universal_dependency_pos_type Universal_dependency_pos_type;
