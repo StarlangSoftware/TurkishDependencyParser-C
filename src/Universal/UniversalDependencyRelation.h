@@ -73,4 +73,6 @@ Parser_evaluation_score_ptr compare_relations(Universal_dependency_relation_ptr 
 
 Universal_dependency_relation_ptr clone_universal_dependency_relation(Universal_dependency_relation_ptr relation);
 
+char* universal_dependency_relation_to_string(Universal_dependency_relation_ptr relation);
+
 #endif //DEPENDENCYPARSER_UNIVERSALDEPENDENCYRELATION_H

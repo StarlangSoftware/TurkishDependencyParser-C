@@ -4,6 +4,8 @@
 
 #include <stdlib.h>
 #include <StringUtils.h>
+#include <string.h>
+#include <stdio.h>
 #include "UniversalDependencyRelation.h"
 #include "UniversalDependencyPosType.h"
 
@@ -82,4 +84,19 @@ Universal_dependency_relation_ptr clone_universal_dependency_relation(Universal_
 
 void free_universal_dependency_relation(Universal_dependency_relation_ptr universal_dependency_relation) {
     free(universal_dependency_relation);
+}
+
+char *universal_dependency_relation_to_string(Universal_dependency_relation_ptr relation) {
+    char* result = NULL;
+    for (int i = 0; i < 62; i++){
+        if (relation->universal_dependency_type == universal_dependency_tags[i]){
+            if (relation->to_word < 10){
+                result = malloc((strlen(universal_dependency_types[i]) + 2) * sizeof(char));
+            } else {
+                result = malloc((strlen(universal_dependency_types[i]) + 3) * sizeof(char));
+            }
+            break;
+        }
+    }
+    return result;
 }
