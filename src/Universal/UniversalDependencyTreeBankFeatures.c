@@ -215,7 +215,7 @@ char *get_pos_string(Universal_dependency_pos_type u_pos) {
             return universal_dependency_pos_types[1];
         case INTJ:
             return universal_dependency_pos_types[2];
-        case NOUN:
+        case NOUN_POS:
             return universal_dependency_pos_types[3];
         case PROPN:
             return universal_dependency_pos_types[4];
