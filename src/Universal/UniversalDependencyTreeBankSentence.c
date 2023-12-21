@@ -9,6 +9,7 @@
 #include <printf.h>
 #include <string.h>
 #include <RegularExpression.h>
+#include <Memory/Memory.h>
 #include "UniversalDependencyTreeBankSentence.h"
 #include "UniversalDependencyPosType.h"
 #include "UniversalDependencyRelation.h"
@@ -17,7 +18,7 @@
 
 Universal_dependency_tree_bank_sentence_ptr
 create_universal_dependency_tree_bank_sentence(const char* language, const char *sentence) {
-    Universal_dependency_tree_bank_sentence_ptr result = malloc(sizeof(Universal_dependency_tree_bank_sentence));
+    Universal_dependency_tree_bank_sentence_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_sentence), "create_universal_dependency_tree_bank_sentence");
     result->words = create_array_list();
     result->comments = create_array_list();
     Array_list_ptr lines = str_split(sentence, '\n');
@@ -28,7 +29,7 @@ create_universal_dependency_tree_bank_sentence(const char* language, const char 
             continue;
         }
         if (starts_with(line, "#")){
-            array_list_add(result->comments, line);
+            array_list_add(result->comments, clone_string(line));
         } else {
             Array_list_ptr items = str_split(line, '\t');
             if (items->size != 10){
@@ -47,27 +48,26 @@ create_universal_dependency_tree_bank_sentence(const char* language, const char 
                         char* tmp = array_list_get(items, 7);
                         char* dependency_type = uppercase_en(tmp);
                         relation = create_universal_dependency_relation(to, dependency_type);
-                        free(dependency_type);
+                        free_(dependency_type);
                     }
                     char* deps = array_list_get(items, 8);
                     char* misc = array_list_get(items, 9);
-                    Universal_dependency_tree_bank_word_ptr word = create_universal_dependency_tree_bank_word(atoi(id), surface_form,
-                                                                                                              lemma, upos, xpos, features, relation, deps, misc);
+                    Universal_dependency_tree_bank_word_ptr word = create_universal_dependency_tree_bank_word(atoi(id), surface_form, lemma, upos, xpos, features, relation, deps, misc);
                     array_list_add(result->words, word);
                 }
             }
-            free_array_list(items, free);
+            free_array_list(items, free_);
         }
     }
     free_regular_expression(expression);
-    free_array_list(lines, free);
+    free_array_list(lines, free_);
     return result;
 }
 
 void free_universal_dependency_tree_bank_sentence(Universal_dependency_tree_bank_sentence_ptr sentence) {
-    free_array_list(sentence->words, free);
-    free_array_list(sentence->comments, free);
-    free(sentence);
+    free_array_list(sentence->words, (void (*)(void *)) free_universal_dependency_tree_bank_word);
+    free_array_list(sentence->comments, free_);
+    free_(sentence);
 }
 
 Parser_evaluation_score_ptr compare_sentences(Universal_dependency_tree_bank_sentence_ptr sentence1,

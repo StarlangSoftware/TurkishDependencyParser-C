@@ -2,11 +2,11 @@
 // Created by Olcay Taner YILDIZ on 11.11.2023.
 //
 
-#include <stdlib.h>
 #include <string.h>
 #include <StringUtils.h>
 #include <Dictionary/Word.h>
 #include <FileUtils.h>
+#include <Memory/Memory.h>
 #include "UniversalDependencyTreeBankFeatures.h"
 #include "UniversalDependencyRelation.h"
 
@@ -132,7 +132,7 @@ static int english_feature_values_size[25] = {10, 4, 1, 1, 1,
 
 Universal_dependency_tree_bank_features_ptr
 create_universal_dependency_tree_bank_features(const char *features) {
-    Universal_dependency_tree_bank_features_ptr result = malloc(sizeof(Universal_dependency_tree_bank_features));
+    Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features), "create_universal_dependency_tree_bank_features");
     result->feature_list = create_string_hash_map();
     add_to_feature_list(result, features);
     return result;
@@ -215,11 +215,11 @@ char *get_pos_string(Universal_dependency_pos_type u_pos) {
             return universal_dependency_pos_types[1];
         case INTJ:
             return universal_dependency_pos_types[2];
-        case NOUN_POS:
+        case NOUN_POS2:
             return universal_dependency_pos_types[3];
         case PROPN:
             return universal_dependency_pos_types[4];
-        case VERB_POS:
+        case VERB_POS2:
             return universal_dependency_pos_types[5];
         case ADP:
             return universal_dependency_pos_types[6];
@@ -248,8 +248,8 @@ char *get_pos_string(Universal_dependency_pos_type u_pos) {
 
 void free_universal_dependency_tree_bank_features(
         Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features) {
-    free_hash_map2(universal_dependency_tree_bank_features->feature_list, free, free);
-    free(universal_dependency_tree_bank_features);
+    free_hash_map2(universal_dependency_tree_bank_features->feature_list, free_, free_);
+    free_(universal_dependency_tree_bank_features);
 }
 
 char *universal_dependency_tree_bank_features_to_string(
@@ -275,11 +275,11 @@ char *universal_dependency_tree_bank_features_to_string(
 
 Universal_dependency_tree_bank_features_ptr clone_universal_dependency_tree_bank_features(
         Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features) {
-    Universal_dependency_tree_bank_features_ptr result = malloc(sizeof(Universal_dependency_tree_bank_features));
+    Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features), "clone_universal_dependency_tree_bank_features");
     result->feature_list = create_string_hash_map();
     char* features = universal_dependency_tree_bank_features_to_string(universal_dependency_tree_bank_features);
     add_to_feature_list(result, features);
-    free(features);
+    free_(features);
     return result;
 }
 
@@ -295,6 +295,6 @@ void add_to_feature_list(Universal_dependency_tree_bank_features_ptr universal_d
             hash_map_insert(universal_dependency_tree_bank_features->feature_list, feature_name, feature_value);
             free_array_list(items, NULL);
         }
-        free_array_list(list, free);
+        free_array_list(list, free_);
     }
 }

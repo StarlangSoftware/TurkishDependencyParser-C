@@ -3,13 +3,14 @@
 //
 
 #include <stdlib.h>
+#include <Memory/Memory.h>
 #include "ParserEvaluationScore.h"
 
 Parser_evaluation_score_ptr create_parser_evaluation_score(double LAS,
                                                            double UAS,
                                                            double LS,
                                                            int word_count) {
-    Parser_evaluation_score_ptr result = malloc(sizeof(Parser_evaluation_score));
+    Parser_evaluation_score_ptr result = malloc_(sizeof(Parser_evaluation_score), "create_parser_evaluation_score");
     result->LAS = LAS;
     result->UAS = UAS;
     result->LS = LS;
@@ -18,7 +19,7 @@ Parser_evaluation_score_ptr create_parser_evaluation_score(double LAS,
 }
 
 Parser_evaluation_score_ptr create_parser_evaluation_score2() {
-    Parser_evaluation_score_ptr result = malloc(sizeof(Parser_evaluation_score));
+    Parser_evaluation_score_ptr result = malloc_(sizeof(Parser_evaluation_score), "create_parser_evaluation_score2");
     result->LAS = 0;
     result->UAS = 0;
     result->LS = 0;

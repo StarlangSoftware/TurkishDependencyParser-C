@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "TurkishDependencyTreeBankWord.h"
+#include "Memory/Memory.h"
 
 /**
  * Given the parsed xml node which contains information about a word and related attributes including the
@@ -13,16 +14,20 @@
  * @param wordNode Xml parsed node containing information about a word.
  */
 Turkish_dependency_tree_bank_word_ptr create_turkish_dependency_tree_bank_word(Xml_element_ptr word_node) {
-    Turkish_dependency_tree_bank_word_ptr result = malloc(sizeof(Turkish_dependency_tree_bank_word));
+    Turkish_dependency_tree_bank_word_ptr result = malloc_(sizeof(Turkish_dependency_tree_bank_word), "create_turkish_dependency_tree_bank_word");
     char* IG, *relation_name, *dependency_type;
     int to_word = 0, to_IG = 0;
     result->original_parses = create_array_list();
     result->relation = NULL;
     if (has_attributes(word_node)){
-        result->name = str_copy(result->name, trim(word_node->pcData)->s);
+        String_ptr st = trim(word_node->pcData);
+        result->name = str_copy(result->name, st->s);
+        free_string_ptr(st);
         if (get_attribute_value(word_node, "IG") != NULL){
             IG = get_attribute_value(word_node, "IG");
-            result->parse = create_morphological_parse2(split_into_inflectional_groups(IG));
+            Array_list_ptr inflectional_groups = split_into_inflectional_groups(IG);
+            result->parse = create_morphological_parse2(inflectional_groups);
+            free_array_list(inflectional_groups, free_);
         }
         if (get_attribute_value(word_node, "REL") != NULL){
             relation_name = get_attribute_value(word_node, "REL");
@@ -42,7 +47,7 @@ Turkish_dependency_tree_bank_word_ptr create_turkish_dependency_tree_bank_word(X
                             break;
                     }
                 }
-                free_array_list(relation_parts, free);
+                free_array_list(relation_parts, free_);
             }
         }
         for (int i = 1; i <= 9; i++){
@@ -50,7 +55,9 @@ Turkish_dependency_tree_bank_word_ptr create_turkish_dependency_tree_bank_word(X
             sprintf(id, "ORG_IG%d", i);
             if (get_attribute_value(word_node, id) != NULL){
                 IG = get_attribute_value(word_node, id);
-                array_list_add(result->original_parses, create_morphological_parse2(split_into_inflectional_groups(IG)));
+                Array_list_ptr inflectional_groups = split_into_inflectional_groups(IG);
+                array_list_add(result->original_parses, create_morphological_parse2(inflectional_groups));
+                free_array_list(inflectional_groups, free_);
             }
         }
     }
@@ -66,20 +73,20 @@ Array_list_ptr split_into_inflectional_groups(char *IG) {
     Array_list_ptr inflectional_groups = create_array_list();
     char* ig1 = replace_all(IG, "(+Punc", "@");
     char* ig = replace_all(ig1, ")+Punc", "$");
-    free(ig1);
+    free_(ig1);
     Array_list_ptr iGs = str_split3(ig, "[()]");
-    free(ig);
+    free_(ig);
     for (int i = 0; i < iGs->size; i++){
         char* IGI1 = replace_all(array_list_get(iGs, i), "@", "(+Punc");
         char* IGI = replace_all(IGI1, "$", ")+Punc");
-        free(IGI1);
+        free_(IGI1);
         if (IGI != NULL){
             array_list_add(inflectional_groups, IGI);
         } else {
-            free(IGI);
+            free_(IGI);
         }
     }
-    free_array_list(iGs, free);
+    free_array_list(iGs, free_);
     return inflectional_groups;
 }
 
@@ -93,9 +100,9 @@ Morphological_parse_ptr get_original_parse(Turkish_dependency_tree_bank_word_ptr
 }
 
 void free_turkish_dependency_tree_bank_word(Turkish_dependency_tree_bank_word_ptr word) {
-    free(word->name);
+    free_(word->name);
     free_turkish_relation(word->relation);
     free_morphological_parse(word->parse);
     free_array_list(word->original_parses, (void (*)(void *)) free_morphological_parse);
-    free(word);
+    free_(word);
 }

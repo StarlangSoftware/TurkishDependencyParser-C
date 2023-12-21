@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <StringUtils.h>
 #include <string.h>
+#include <Memory/Memory.h>
 #include "StanfordDependencyRelation.h"
 
 /**
@@ -14,14 +15,14 @@
  * @param dependencyType Type of the dependency relation in string form
  */
 Stanford_dependency_relation_ptr create_stanford_relation(int to_word, const char *dependency_type) {
-    Stanford_dependency_relation_ptr result = malloc(sizeof(Stanford_dependency_relation));
+    Stanford_dependency_relation_ptr result = malloc_(sizeof(Stanford_dependency_relation), "create_stanford_relation");
     result->to_word = to_word;
     result->stanford_dependency_type = get_stanford_dependency_tag(dependency_type);
     return result;
 }
 
 void free_stanford_relation(Stanford_dependency_relation_ptr stanford_relation) {
-    free(stanford_relation);
+    free_(stanford_relation);
 }
 
 /**
@@ -34,7 +35,7 @@ void free_stanford_relation(Stanford_dependency_relation_ptr stanford_relation) 
 Stanford_dependency_type get_stanford_dependency_tag(const char *tag) {
     char* _tag = lowercase_en(tag);
     int index = string_index(_tag, stanford_dependency_types, 49);
-    free(_tag);
+    free_(_tag);
     if (index != -1){
         return stanford_dependency_tags[index];
     }

@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include <Memory/Memory.h>
 #include "TurkishDependencyTreeBankSentence.h"
 #include "TurkishDependencyTreeBankWord.h"
 
@@ -26,7 +27,7 @@ Sentence_ptr create_turkish_dependency_tree_bank_sentence(Xml_element_ptr senten
 
 void free_turkish_dependency_tree_bank_sentence(Sentence_ptr sentence) {
     free_array_list(sentence->words, (void (*)(void *)) free_turkish_dependency_tree_bank_word);
-    free(sentence);
+    free_(sentence);
 }
 
 /**

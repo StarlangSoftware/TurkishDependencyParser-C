@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <StringUtils.h>
+#include <Memory/Memory.h>
 #include "TurkishDependencyRelation.h"
 
 /**
@@ -14,7 +15,7 @@
  * @param dependencyType Type of the dependency relation in string form
  */
 Turkish_dependency_relation_ptr create_turkish_relation(int to_word, int to_IG, const char *dependency_type) {
-    Turkish_dependency_relation_ptr result = malloc(sizeof(Turkish_dependency_relation));
+    Turkish_dependency_relation_ptr result = malloc_(sizeof(Turkish_dependency_relation), "create_turkish_relation");
     result->to_IG = to_IG;
     result->to_word = to_word;
     result->turkish_dependency_type = get_turkish_dependency_tag(dependency_type);
@@ -22,7 +23,7 @@ Turkish_dependency_relation_ptr create_turkish_relation(int to_word, int to_IG, 
 }
 
 void free_turkish_relation(Turkish_dependency_relation_ptr turkish_relation) {
-    free(turkish_relation);
+    free_(turkish_relation);
 }
 
 /**
@@ -35,7 +36,7 @@ void free_turkish_relation(Turkish_dependency_relation_ptr turkish_relation) {
 Turkish_dependency_type get_turkish_dependency_tag(const char *tag) {
     char* _tag = uppercase_en(tag);
     int index = string_index(_tag, turkish_dependency_types, 23);
-    free(_tag);
+    free_(_tag);
     if (index != -1){
         return turkish_dependency_tags[index];
     }

@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <StringUtils.h>
+#include <Memory/Memory.h>
 #include "UniversalDependencyTreeBankWord.h"
 
 Universal_dependency_tree_bank_word_ptr
@@ -16,7 +17,7 @@ create_universal_dependency_tree_bank_word(int id,
                                            Universal_dependency_relation_ptr relation,
                                            char *deps,
                                            char *misc) {
-    Universal_dependency_tree_bank_word_ptr result = malloc(sizeof(Universal_dependency_tree_bank_word));
+    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "create_universal_dependency_tree_bank_word");
     result->id = id;
     result->name = str_copy(result->name, name);
     result->lemma = str_copy(result->lemma, lemma);
@@ -30,7 +31,7 @@ create_universal_dependency_tree_bank_word(int id,
 }
 
 Universal_dependency_tree_bank_word_ptr create_universal_dependency_tree_bank_word2() {
-    Universal_dependency_tree_bank_word_ptr result = malloc(sizeof(Universal_dependency_tree_bank_word));
+    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "create_universal_dependency_tree_bank_word2");
     result->id = 0;
     result->name = NULL;
     result->lemma = NULL;
@@ -49,12 +50,12 @@ free_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr
     if (universal_dependency_tree_bank_word->features != NULL){
         free_universal_dependency_tree_bank_features(universal_dependency_tree_bank_word->features);
     }
-    free(universal_dependency_tree_bank_word->name);
-    free(universal_dependency_tree_bank_word->lemma);
-    free(universal_dependency_tree_bank_word->xpos);
-    free(universal_dependency_tree_bank_word->deps);
-    free(universal_dependency_tree_bank_word->misc);
-    free(universal_dependency_tree_bank_word);
+    free_(universal_dependency_tree_bank_word->name);
+    free_(universal_dependency_tree_bank_word->lemma);
+    free_(universal_dependency_tree_bank_word->xpos);
+    free_(universal_dependency_tree_bank_word->deps);
+    free_(universal_dependency_tree_bank_word->misc);
+    free_(universal_dependency_tree_bank_word);
 }
 
 char *
@@ -68,7 +69,7 @@ bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependenc
 
 Universal_dependency_tree_bank_word_ptr
 clone_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word) {
-    Universal_dependency_tree_bank_word_ptr result = malloc(sizeof(Universal_dependency_tree_bank_word));
+    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "clone_universal_dependency_tree_bank_word");
     result->id = universal_dependency_tree_bank_word->id;
     result->name = str_copy(result->name, universal_dependency_tree_bank_word->name);
     result->lemma = str_copy(result->lemma, universal_dependency_tree_bank_word->lemma);

@@ -4,6 +4,7 @@
 
 #include <XmlDocument.h>
 #include <stdlib.h>
+#include <Memory/Memory.h>
 #include "TurkishDependencyTreeBankCorpus.h"
 #include "TurkishDependencyTreeBankSentence.h"
 
@@ -24,6 +25,7 @@ Corpus_ptr create_turkish_dependency_tree_bank_corpus(const char *file_name) {
         corpus_add_sentence(corpus, sentence);
         sentenceNode = sentenceNode->next_sibling;
     }
+    free_document(doc);
     return corpus;
 }
 
@@ -31,5 +33,5 @@ void free_turkish_dependency_tree_bank_corpus(Corpus_ptr corpus) {
     free_array_list(corpus->sentences, (void (*)(void *)) free_turkish_dependency_tree_bank_sentence);
     free_array_list(corpus->paragraphs, NULL);
     free_counter_hash_map(corpus->word_list);
-    free(corpus);
+    free_(corpus);
 }

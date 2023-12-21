@@ -2,17 +2,17 @@
 // Created by Olcay Taner YILDIZ on 14.11.2023.
 //
 
-#include <stdlib.h>
 #include <StringUtils.h>
 #include <Dictionary/Word.h>
 #include <FileUtils.h>
 #include <string.h>
+#include <Memory/Memory.h>
 #include "UniversalDependencyTreeBankCorpus.h"
 #include "UniversalDependencyTreeBankSentence.h"
 
 Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_corpus(const char *file_name) {
     char sentence[MAX_LINE_LENGTH];
-    Universal_dependency_tree_bank_corpus_ptr result = malloc(sizeof(Universal_dependency_tree_bank_corpus));
+    Universal_dependency_tree_bank_corpus_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_corpus), "create_universal_dependency_tree_bank_corpus");
     String_ptr st = substring(file_name, 0, str_find_c(file_name, "_"));
     result->language = str_copy(result->language, st->s);
     result->sentences = create_array_list();
@@ -29,7 +29,7 @@ Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_
             sprintf(sentence, "%s\n%s", sentence, line);
         }
     }
-    free_array_list(lines, free);
+    free_array_list(lines, free_);
     return result;
 }
 
@@ -45,7 +45,7 @@ compare_parses(Universal_dependency_tree_bank_corpus_ptr corpus1, Universal_depe
 }
 
 void free_universal_dependency_tree_bank_corpus(Universal_dependency_tree_bank_corpus_ptr corpus) {
-    free_array_list(corpus->sentences, free);
-    free(corpus->language);
-    free(corpus);
+    free_array_list(corpus->sentences, (void (*)(void *)) free_universal_dependency_tree_bank_sentence);
+    free_(corpus->language);
+    free_(corpus);
 }

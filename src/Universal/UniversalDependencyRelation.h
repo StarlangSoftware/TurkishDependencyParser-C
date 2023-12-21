@@ -44,8 +44,8 @@ static Universal_dependency_type universal_dependency_tags[62] = {ACL, ADVCL,
 static char* universal_dependency_pos_types[17] = {"ADJ", "ADV", "INTJ", "NOUN", "PROPN", "VERB", "ADP", "AUX", "CCONJ",
                                                    "DET", "NUM", "PART", "PRON", "SCONJ", "PUNCT", "SYM", "X"};
 
-static Universal_dependency_pos_type universal_dependency_pos_tags[17] = {ADJ, ADV, INTJ, NOUN_POS, PROPN,
-                                                                          VERB_POS, ADP, AUX_POS, CCONJ,
+static Universal_dependency_pos_type universal_dependency_pos_tags[17] = {ADJ, ADV, INTJ, NOUN_POS2, PROPN,
+                                                                          VERB_POS2, ADP, AUX_POS, CCONJ,
                                                                           DET_POS, NUM, PART,
                                                                           PRON, SCONJ,
                                                                           PUNCT_POS, SYM, X};
