@@ -29,6 +29,11 @@ Corpus_ptr create_turkish_dependency_tree_bank_corpus(const char *file_name) {
     return corpus;
 }
 
+/**
+ * Frees memory allocated for Turkish dependency corpus. Deallocates sentences, paragraphs array lists, and word_list
+ * hash map.
+ * @param corpus Corpus to be deallocated.
+ */
 void free_turkish_dependency_tree_bank_corpus(Corpus_ptr corpus) {
     free_array_list(corpus->sentences, (void (*)(void *)) free_turkish_dependency_tree_bank_sentence);
     free_array_list(corpus->paragraphs, NULL);

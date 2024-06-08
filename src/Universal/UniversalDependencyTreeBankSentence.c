@@ -16,6 +16,13 @@
 #include "UniversalDependencyTreeBankFeatures.h"
 #include "UniversalDependencyTreeBankWord.h"
 
+/**
+ * Constructor for the UniversalDependencyTreeBankSentence.  Get a line as input and splits the line wrt tab
+ * character. The number of items should be 10. The items are id, surfaceForm, lemma, upos, xpos, feature list,
+ * head word index, dependency type, external dependencies and miscellaneous things for one word.
+ * @param language Language name. Currently, 'en' and 'tr' languages are supported.
+ * @param sentence Sentence string to be processed.
+ */
 Universal_dependency_tree_bank_sentence_ptr
 create_universal_dependency_tree_bank_sentence(const char* language, const char *sentence) {
     Universal_dependency_tree_bank_sentence_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_sentence), "create_universal_dependency_tree_bank_sentence");
@@ -64,12 +71,22 @@ create_universal_dependency_tree_bank_sentence(const char* language, const char 
     return result;
 }
 
+/**
+ * Frees memory allocated for dependency sentence. Deallocates words and comments array lists.
+ * @param sentence Sentence to be deallocated.
+ */
 void free_universal_dependency_tree_bank_sentence(Universal_dependency_tree_bank_sentence_ptr sentence) {
     free_array_list(sentence->words, (void (*)(void *)) free_universal_dependency_tree_bank_word);
     free_array_list(sentence->comments, free_);
     free_(sentence);
 }
 
+/**
+ * Compares the sentence with the given sentence and returns a parser evaluation score for this comparison. The result
+ * is calculated by summing up the parser evaluation scores of word by word dpendency relation comparisons.
+ * @param sentence Universal dependency sentence to be compared.
+ * @return A parser evaluation score object.
+ */
 Parser_evaluation_score_ptr compare_sentences(Universal_dependency_tree_bank_sentence_ptr sentence1,
                                               Universal_dependency_tree_bank_sentence_ptr sentence2) {
     Parser_evaluation_score_ptr score = create_parser_evaluation_score2();

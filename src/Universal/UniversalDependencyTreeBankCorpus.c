@@ -10,6 +10,11 @@
 #include "UniversalDependencyTreeBankCorpus.h"
 #include "UniversalDependencyTreeBankSentence.h"
 
+/**
+ * Constructs a universal dependency corpus from an input file. Reads the sentences one by one and constructs a
+ * universal dependency sentence from each line read.
+ * @param fileName Input file name.
+ */
 Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_corpus(const char *file_name) {
     char sentence[MAX_LINE_LENGTH];
     Universal_dependency_tree_bank_corpus_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_corpus), "create_universal_dependency_tree_bank_corpus");
@@ -33,6 +38,12 @@ Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_
     return result;
 }
 
+/**
+ * Compares the corpus with the given corpus and returns a parser evaluation score for this comparison. The result
+ * is calculated by summing up the parser evaluation scores of sentence by sentence comparisons.
+ * @param corpus Universal dependency corpus to be compared.
+ * @return A parser evaluation score object.
+ */
 Parser_evaluation_score_ptr
 compare_parses(Universal_dependency_tree_bank_corpus_ptr corpus1, Universal_dependency_tree_bank_corpus_ptr corpus2) {
     Parser_evaluation_score_ptr score = create_parser_evaluation_score2();
@@ -44,6 +55,10 @@ compare_parses(Universal_dependency_tree_bank_corpus_ptr corpus1, Universal_depe
     return score;
 }
 
+/**
+ * Frees memory allocated to universal dependency corpus. Deallocates sentences array list.
+ * @param corpus Corpus to be deallocated.
+ */
 void free_universal_dependency_tree_bank_corpus(Universal_dependency_tree_bank_corpus_ptr corpus) {
     free_array_list(corpus->sentences, (void (*)(void *)) free_universal_dependency_tree_bank_sentence);
     free_(corpus->language);

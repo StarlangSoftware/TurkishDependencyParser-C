@@ -2,11 +2,22 @@
 // Created by Olcay Taner YILDIZ on 11.11.2023.
 //
 
-#include <stdlib.h>
 #include <StringUtils.h>
 #include <Memory/Memory.h>
 #include "UniversalDependencyTreeBankWord.h"
 
+/**
+ * Constructor of the universal dependency word. Sets the attributes.
+ * @param id Id of the word
+ * @param name Name of the word
+ * @param lemma Lemma of the word
+ * @param upos Universal part of speech tag.
+ * @param xpos Extra part of speech tag
+ * @param features Feature list of the word
+ * @param relation Universal dependency relation of the word
+ * @param deps External dependencies for the word
+ * @param misc Miscellaneous information for the word.
+ */
 Universal_dependency_tree_bank_word_ptr
 create_universal_dependency_tree_bank_word(int id,
                                            char *name,
@@ -30,6 +41,9 @@ create_universal_dependency_tree_bank_word(int id,
     return result;
 }
 
+/**
+ * Default constructor for the universal dependency word. Sets the attributes to default values.
+ */
 Universal_dependency_tree_bank_word_ptr create_universal_dependency_tree_bank_word2() {
     Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "create_universal_dependency_tree_bank_word2");
     result->id = 0;
@@ -44,6 +58,11 @@ Universal_dependency_tree_bank_word_ptr create_universal_dependency_tree_bank_wo
     return result;
 }
 
+/**
+ * Frees memory allocated for dependency word. Deallocates features hash map, dependency relation, and name, lemma, xpos
+ * deps and misc strings.
+ * @param universal_dependency_tree_bank_word Word to be deallocated.
+ */
 void
 free_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word) {
     free_universal_dependency_relation(universal_dependency_tree_bank_word->relation);
@@ -58,11 +77,21 @@ free_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr
     free_(universal_dependency_tree_bank_word);
 }
 
+/**
+ * Gets the value of a given feature.
+ * @param featureName Name of the feature
+ * @return Value of the feature
+ */
 char *
 get_feature_value2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, char *feature_name) {
     return get_feature_value(universal_dependency_tree_bank_word->features, feature_name);
 }
 
+/**
+ * Checks if the given feature exists.
+ * @param featureName Name of the feature
+ * @return True if the given feature exists, false otherwise.
+ */
 bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, char *feature_name) {
     return feature_exists(universal_dependency_tree_bank_word->features, feature_name);
 }

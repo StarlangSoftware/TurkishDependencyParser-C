@@ -2,10 +2,16 @@
 // Created by Olcay Taner YILDIZ on 11.11.2023.
 //
 
-#include <stdlib.h>
 #include <Memory/Memory.h>
 #include "ParserEvaluationScore.h"
 
+/**
+ * Another constructor of the parser evaluation score object.
+ * @param LAS Label attachment score
+ * @param UAS Unlabelled attachment score
+ * @param LS Label score
+ * @param wordCount Number of words evaluated
+ */
 Parser_evaluation_score_ptr create_parser_evaluation_score(double LAS,
                                                            double UAS,
                                                            double LS,
@@ -18,6 +24,9 @@ Parser_evaluation_score_ptr create_parser_evaluation_score(double LAS,
     return result;
 }
 
+/**
+ * Empty constructor of the parser evaluation score object.
+ */
 Parser_evaluation_score_ptr create_parser_evaluation_score2() {
     Parser_evaluation_score_ptr result = malloc_(sizeof(Parser_evaluation_score), "create_parser_evaluation_score2");
     result->LAS = 0;
@@ -27,6 +36,10 @@ Parser_evaluation_score_ptr create_parser_evaluation_score2() {
     return result;
 }
 
+/**
+ * Adds a parser evaluation score to the current evaluation score.
+ * @param parserEvaluationScore Parser evaluation score to be added.
+ */
 void add_score(Parser_evaluation_score_ptr score1, Parser_evaluation_score_ptr score2) {
     score1->LAS = (score1->LAS * score1->word_count + score2->LAS * score2->word_count) / (score1->word_count + score2->word_count);
     score1->UAS = (score1->UAS * score1->word_count + score2->UAS * score2->word_count) / (score1->word_count + score2->word_count);

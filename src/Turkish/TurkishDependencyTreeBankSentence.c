@@ -25,6 +25,10 @@ Sentence_ptr create_turkish_dependency_tree_bank_sentence(Xml_element_ptr senten
     return sentence;
 }
 
+/**
+ * Frees memory allocated for a Turkish dependency sentence. Deallocates words array list.
+ * @param sentence Sentence to be deallocated.
+ */
 void free_turkish_dependency_tree_bank_sentence(Sentence_ptr sentence) {
     free_array_list(sentence->words, (void (*)(void *)) free_turkish_dependency_tree_bank_word);
     free_(sentence);

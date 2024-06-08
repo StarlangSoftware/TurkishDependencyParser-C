@@ -99,6 +99,10 @@ Morphological_parse_ptr get_original_parse(Turkish_dependency_tree_bank_word_ptr
     return array_list_get(word->original_parses, index);
 }
 
+/**
+ * Frees memory allocated to dependency word. Deallocates relation, morphological parse and IG array list.
+ * @param word Word to be deallocated.
+ */
 void free_turkish_dependency_tree_bank_word(Turkish_dependency_tree_bank_word_ptr word) {
     free_(word->name);
     free_turkish_relation(word->relation);

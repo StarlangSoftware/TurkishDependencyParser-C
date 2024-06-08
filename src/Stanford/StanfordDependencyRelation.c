@@ -2,9 +2,7 @@
 // Created by Olcay Taner YILDIZ on 9.11.2023.
 //
 
-#include <stdlib.h>
 #include <StringUtils.h>
-#include <string.h>
 #include <Memory/Memory.h>
 #include "StanfordDependencyRelation.h"
 
@@ -21,6 +19,10 @@ Stanford_dependency_relation_ptr create_stanford_relation(int to_word, const cha
     return result;
 }
 
+/**
+ * Frees memory allocated for a Stanford relation.
+ * @param stanford_relation Relation to deallocate.
+ */
 void free_stanford_relation(Stanford_dependency_relation_ptr stanford_relation) {
     free_(stanford_relation);
 }

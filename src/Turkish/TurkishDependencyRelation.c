@@ -22,6 +22,10 @@ Turkish_dependency_relation_ptr create_turkish_relation(int to_word, int to_IG, 
     return result;
 }
 
+/**
+ * Frees memory allocated for a Turkish relation.
+ * @param turkish_relation Relation to be deallocated.
+ */
 void free_turkish_relation(Turkish_dependency_relation_ptr turkish_relation) {
     free_(turkish_relation);
 }

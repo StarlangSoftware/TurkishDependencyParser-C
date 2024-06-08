@@ -130,6 +130,13 @@ static int english_feature_values_size[25] = {10, 4, 1, 1, 1,
                                               3, 2, 0, 1, 0,
                                               1, 3, 0, 0, 3};
 
+/**
+ * Constructor of a UniversalDependencyTreeBankFeatures object. Given the language of the word and features of the
+ * word as a string, the method splits the features with respect to pipe character. Then for each feature type and
+ * value pair, their values and types are inserted into the featureList hash map. The method also check for validity
+ * of the feature values for that feature type.
+ * @param features Feature string.
+ */
 Universal_dependency_tree_bank_features_ptr
 create_universal_dependency_tree_bank_features(const char *features) {
     Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features), "create_universal_dependency_tree_bank_features");
@@ -138,15 +145,32 @@ create_universal_dependency_tree_bank_features(const char *features) {
     return result;
 }
 
+/**
+ * Gets the value of a given feature.
+ * @param feature Name of the feature
+ * @return Value of the feature
+ */
 char *get_feature_value(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features, char *feature) {
     return hash_map_get(universal_dependency_tree_bank_features->feature_list, feature);
 }
 
+/**
+ * Checks if the given feature exists in the feature list.
+ * @param feature Name of the feature
+ * @return True, if the feature list contains the feature, false otherwise.
+ */
 bool
 feature_exists(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features, char *feature) {
     return hash_map_contains(universal_dependency_tree_bank_features->feature_list, feature);
 }
 
+/**
+ * Returns the index of the universal feature type in the universalFeatureTypes array, given the name of the feature
+ * type.
+ * @param featureName Name of the feature type
+ * @return Index of the universal feature type in the universalFeatureTypes array. If the name does not exist, the
+ * function returns -1.
+ */
 int
 feature_index(char *feature_name) {
     int result;
@@ -160,10 +184,23 @@ feature_index(char *feature_name) {
     return result;
 }
 
+/**
+ * Returns the index of the universal dependency type in the universalDependencyTypes array, given the name of the
+ * universal dependency type.
+ * @param universalDependency Universal dependency type
+ * @return Index of the universal dependency type in the universalDependencyTypes array. If the name does not exist,
+ * the function returns -1.
+ */
 int dependency_index(char *universal_dependency) {
     return string_index(universal_dependency, universal_dependency_types, 62);
 }
 
+/**
+ * Returns the number of distinct values for a feature in a given language
+ * @param language Language name. Currently, 'en' and 'tr' languages are supported.
+ * @param featureName Name of the feature type.
+ * @return The number of distinct values for a feature in a given language
+ */
 int number_of_values(char *language, char *feature_name) {
     int index = feature_index(feature_name);
     if (index != -1){
@@ -180,6 +217,15 @@ int number_of_values(char *language, char *feature_name) {
     return -1;
 }
 
+/**
+ * Returns the index of the given value in the feature value array for the given feature in the given
+ * language.
+ * @param language Language name. Currently, 'en' and 'tr' languages are supported.
+ * @param featureName Name of the feature.
+ * @param featureValue Value of the feature.
+ * @return The index of the given feature value in the feature value array for the given feature in the given
+ * language.
+ */
 int feature_value_index(char *language, char *feature_name, char *feature_value) {
     char*** search_array;
     int index = feature_index(feature_name);
@@ -203,10 +249,20 @@ int feature_value_index(char *language, char *feature_name, char *feature_value)
     return -1;
 }
 
+/**
+ * Returns the index of the given universal dependency pos.
+ * @param uPos Given universal dependency part of speech tag.
+ * @return The index of the universal dependency pos.
+ */
 int pos_index(char *u_pos) {
     return string_index(u_pos, universal_dependency_pos_types, 17);
 }
 
+/**
+ * Converts Universal_dependency_pos_type to string.
+ * @param u_pos Upos to be converted.
+ * @return Converted Universal_dependency_pos_type
+ */
 char *get_pos_string(Universal_dependency_pos_type u_pos) {
     switch (u_pos) {
         case ADJ:
@@ -246,12 +302,20 @@ char *get_pos_string(Universal_dependency_pos_type u_pos) {
     }
 }
 
+/**
+ * Frees memory allocated to universal dependency features. Deallocates feature list hash map.
+ * @param universal_dependency_tree_bank_features Feaures to be deallocated.
+ */
 void free_universal_dependency_tree_bank_features(
         Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features) {
     free_hash_map2(universal_dependency_tree_bank_features->feature_list, free_, free_);
     free_(universal_dependency_tree_bank_features);
 }
 
+/**
+ * Overridden toString method. Returns feature with their values separated with pipe characters.
+ * @return A string of feature values and their names separated with pipe character.
+ */
 char *universal_dependency_tree_bank_features_to_string(
         Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features) {
     char *result = NULL;
@@ -283,6 +347,11 @@ Universal_dependency_tree_bank_features_ptr clone_universal_dependency_tree_bank
     return result;
 }
 
+/**
+ * Adds features to the feature list array.
+ * @param universal_dependency_tree_bank_features Feature object storing the features.
+ * @param features Feature string
+ */
 void add_to_feature_list(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features,
                          const char *features) {
     if (strcmp(features, "_") != 0){
