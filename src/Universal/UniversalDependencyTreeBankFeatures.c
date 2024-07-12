@@ -59,10 +59,10 @@ static char** turkish_feature_values[25] = {
         (char*[]){"Card", "Dist", "Ord"},
         (char*[]){},
         (char*[]){"Yes"},
-        (char*[]){},
+        (char*[]){"Yes"},
 
         (char*[]){"Yes"},
-        (char*[]){},
+        (char*[]){"Yes"},
         (char*[]){},
         (char*[]){},
         (char*[]){},
@@ -81,7 +81,7 @@ static char** turkish_feature_values[25] = {
 
         (char*[]){"Neg",  "Pos"},
         (char*[]){"1",    "2",    "3"},
-        (char*[]){},
+        (char*[]){"Form", "Infm"},
         (char*[]){},
         (char*[]){}
 };
