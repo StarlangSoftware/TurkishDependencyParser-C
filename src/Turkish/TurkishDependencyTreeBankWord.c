@@ -11,7 +11,7 @@
 /**
  * Given the parsed xml node which contains information about a word and related attributes including the
  * dependencies, the method constructs a TurkishDependencyTreeBankWord from it.
- * @param wordNode Xml parsed node containing information about a word.
+ * @param word_node Xml parsed node containing information about a word.
  */
 Turkish_dependency_tree_bank_word_ptr create_turkish_dependency_tree_bank_word(Xml_element_ptr word_node) {
     Turkish_dependency_tree_bank_word_ptr result = malloc_(sizeof(Turkish_dependency_tree_bank_word), "create_turkish_dependency_tree_bank_word");
@@ -92,6 +92,7 @@ Array_list_ptr split_into_inflectional_groups(char *IG) {
 
 /**
  * Accessor for a specific parse.
+ * @param word Word to be processed.
  * @param index Index of the word.
  * @return Parse of the index'th word
  */

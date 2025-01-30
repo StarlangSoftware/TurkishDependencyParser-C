@@ -9,8 +9,8 @@
 /**
  * Another constructor for StanfordDependencyRelation. Gets input toWord and dependencyType as arguments and
  * calls the super class's constructor and sets the dependency type.
- * @param toWord Index of the word in the sentence that dependency relation is related
- * @param dependencyType Type of the dependency relation in string form
+ * @param to_word Index of the word in the sentence that dependency relation is related
+ * @param dependency_type Type of the dependency relation in string form
  */
 Stanford_dependency_relation_ptr create_stanford_relation(int to_word, const char *dependency_type) {
     Stanford_dependency_relation_ptr result = malloc_(sizeof(Stanford_dependency_relation), "create_stanford_relation");

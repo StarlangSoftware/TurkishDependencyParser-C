@@ -10,7 +10,7 @@
 /**
  * Given the parsed xml node which contains information about a sentence, the method constructs a
  * TurkishDependencyTreeBankSentence from it.
- * @param sentenceNode Xml parsed node containing information about a sentence.
+ * @param sentence_node Xml parsed node containing information about a sentence.
  */
 Sentence_ptr create_turkish_dependency_tree_bank_sentence(Xml_element_ptr sentence_node) {
     Sentence_ptr sentence = create_sentence();

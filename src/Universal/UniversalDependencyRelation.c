@@ -11,8 +11,8 @@
 /**
  * Another constructor for UniversalDependencyRelation. Gets input toWord and dependencyType as arguments and
  * calls the super class's constructor and sets the dependency type.
- * @param toWord Index of the word in the sentence that dependency relation is related
- * @param dependencyType Type of the dependency relation in string form
+ * @param to_word Index of the word in the sentence that dependency relation is related
+ * @param dependency_type Type of the dependency relation in string form
  */
 Universal_dependency_relation_ptr
 create_universal_dependency_relation(int to_word, const char* dependency_type) {
@@ -24,7 +24,7 @@ create_universal_dependency_relation(int to_word, const char* dependency_type) {
 
 /**
  * Overridden Universal Dependency Relation constructor. Gets toWord as input and calls it super class's constructor
- * @param toWord Index of the word in the sentence that dependency relation is related
+ * @param to_word Index of the word in the sentence that dependency relation is related
  */
 Universal_dependency_relation_ptr create_universal_dependency_relation2(int to_word) {
     Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation), "create_universal_dependency_relation2");
@@ -64,7 +64,8 @@ Universal_dependency_pos_type get_universal_dependency_pos_tag(const char *tag) 
  * comparison. If toWord fields are equal for both relation UAS is 1, otherwise it is 0. If both toWord and
  * dependency types are the same, LAS is 1, otherwise it is 0. If only dependency types of both relations are
  * the same, LS is 1, otherwise it is 0.
- * @param relation Universal dependency relation to be compared.
+ * @param relation1 First Universal dependency relation to be compared.
+ * @param relation2 Second Universal dependency relation to be compared.
  * @return A parser evaluation score object with (i) LAS = 1, if to and dependency types are same; LAS = 0,
  * otherwise, (ii) UAS = 1, if to is the same; UAS = 0, otherwise, (iii) LS = 1, if dependency types are the same;
  * LS = 0, otherwise.

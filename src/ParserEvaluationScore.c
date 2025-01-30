@@ -10,7 +10,7 @@
  * @param LAS Label attachment score
  * @param UAS Unlabelled attachment score
  * @param LS Label score
- * @param wordCount Number of words evaluated
+ * @param word_count Number of words evaluated
  */
 Parser_evaluation_score_ptr create_parser_evaluation_score(double LAS,
                                                            double UAS,
@@ -38,7 +38,8 @@ Parser_evaluation_score_ptr create_parser_evaluation_score2() {
 
 /**
  * Adds a parser evaluation score to the current evaluation score.
- * @param parserEvaluationScore Parser evaluation score to be added.
+ * @param score1 Parser evaluation score to be added to.
+ * @param score2 Parser evaluation score to be added.
  */
 void add_score(Parser_evaluation_score_ptr score1, Parser_evaluation_score_ptr score2) {
     score1->LAS = (score1->LAS * score1->word_count + score2->LAS * score2->word_count) / (score1->word_count + score2->word_count);

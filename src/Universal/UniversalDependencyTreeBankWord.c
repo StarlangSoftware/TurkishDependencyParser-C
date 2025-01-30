@@ -20,14 +20,14 @@
  */
 Universal_dependency_tree_bank_word_ptr
 create_universal_dependency_tree_bank_word(int id,
-                                           char *name,
-                                           char *lemma,
+                                           const char *name,
+                                           const char *lemma,
                                            Universal_dependency_pos_type upos,
-                                           char *xpos,
+                                           const char *xpos,
                                            Universal_dependency_tree_bank_features_ptr features,
                                            Universal_dependency_relation_ptr relation,
-                                           char *deps,
-                                           char *misc) {
+                                           const char *deps,
+                                           const char *misc) {
     Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "create_universal_dependency_tree_bank_word");
     result->id = id;
     result->name = str_copy(result->name, name);
@@ -79,20 +79,22 @@ free_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr
 
 /**
  * Gets the value of a given feature.
- * @param featureName Name of the feature
+ * @param universal_dependency_tree_bank_word Current word to be processed
+ * @param feature_name Name of the feature
  * @return Value of the feature
  */
 char *
-get_feature_value2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, char *feature_name) {
+get_feature_value2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, const char *feature_name) {
     return get_feature_value(universal_dependency_tree_bank_word->features, feature_name);
 }
 
 /**
  * Checks if the given feature exists.
- * @param featureName Name of the feature
+ * @param universal_dependency_tree_bank_word Current word to be processed
+ * @param feature_name Name of the feature
  * @return True if the given feature exists, false otherwise.
  */
-bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, char *feature_name) {
+bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, const char *feature_name) {
     return feature_exists(universal_dependency_tree_bank_word->features, feature_name);
 }
 

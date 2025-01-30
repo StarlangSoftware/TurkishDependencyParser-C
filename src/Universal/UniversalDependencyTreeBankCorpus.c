@@ -13,7 +13,7 @@
 /**
  * Constructs a universal dependency corpus from an input file. Reads the sentences one by one and constructs a
  * universal dependency sentence from each line read.
- * @param fileName Input file name.
+ * @param file_name Input file name.
  */
 Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_corpus(const char *file_name) {
     char sentence[MAX_LINE_LENGTH];
@@ -41,7 +41,8 @@ Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_
 /**
  * Compares the corpus with the given corpus and returns a parser evaluation score for this comparison. The result
  * is calculated by summing up the parser evaluation scores of sentence by sentence comparisons.
- * @param corpus Universal dependency corpus to be compared.
+ * @param corpus1 First Universal dependency corpus to be compared.
+ * @param corpus2 Second Universal dependency corpus to be compared.
  * @return A parser evaluation score object.
  */
 Parser_evaluation_score_ptr

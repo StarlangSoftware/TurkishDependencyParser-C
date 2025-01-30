@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 9.11.2023.
 //
 
-#include <stdlib.h>
 #include <StringUtils.h>
 #include <Memory/Memory.h>
 #include "TurkishDependencyRelation.h"
@@ -10,9 +9,9 @@
 /**
  * Another constructor for TurkishDependencyRelation. Gets input toWord, toIG, and dependencyType as arguments and
  * calls the super class's constructor and sets the IG and dependency type.
- * @param toWord Index of the word in the sentence that dependency relation is related
- * @param toIG Index of the inflectional group the dependency relation is related
- * @param dependencyType Type of the dependency relation in string form
+ * @param to_word Index of the word in the sentence that dependency relation is related
+ * @param to_IG Index of the inflectional group the dependency relation is related
+ * @param dependency_type Type of the dependency relation in string form
  */
 Turkish_dependency_relation_ptr create_turkish_relation(int to_word, int to_IG, const char *dependency_type) {
     Turkish_dependency_relation_ptr result = malloc_(sizeof(Turkish_dependency_relation), "create_turkish_relation");

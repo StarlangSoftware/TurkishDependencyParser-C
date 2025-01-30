@@ -26,20 +26,20 @@ typedef struct universal_dependency_tree_bank_word Universal_dependency_tree_ban
 typedef Universal_dependency_tree_bank_word *Universal_dependency_tree_bank_word_ptr;
 
 Universal_dependency_tree_bank_word_ptr create_universal_dependency_tree_bank_word(int id,
-                                                                                   char* name,
-                                                                                   char* lemma,
+                                                                                   const char* name,
+                                                                                   const char* lemma,
                                                                                    Universal_dependency_pos_type upos,
-                                                                                   char* xpos,
+                                                                                   const char* xpos,
                                                                                    Universal_dependency_tree_bank_features_ptr features,
                                                                                    Universal_dependency_relation_ptr relation,
-                                                                                   char* deps,
-                                                                                   char* misc);
+                                                                                   const char* deps,
+                                                                                   const char* misc);
 
 void free_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word);
 
-char* get_feature_value2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, char* feature_name);
+char* get_feature_value2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, const char* feature_name);
 
-bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, char* feature_name);
+bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word, const char* feature_name);
 
 Universal_dependency_tree_bank_word_ptr create_universal_dependency_tree_bank_word2();
 

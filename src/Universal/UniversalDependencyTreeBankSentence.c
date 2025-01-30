@@ -84,7 +84,8 @@ void free_universal_dependency_tree_bank_sentence(Universal_dependency_tree_bank
 /**
  * Compares the sentence with the given sentence and returns a parser evaluation score for this comparison. The result
  * is calculated by summing up the parser evaluation scores of word by word dpendency relation comparisons.
- * @param sentence Universal dependency sentence to be compared.
+ * @param sentence1 First Universal dependency sentence to be compared.
+ * @param sentence2 Second Universal dependency sentence to be compared.
  * @return A parser evaluation score object.
  */
 Parser_evaluation_score_ptr compare_sentences(Universal_dependency_tree_bank_sentence_ptr sentence1,

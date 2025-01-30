@@ -20,19 +20,19 @@ Universal_dependency_tree_bank_features_ptr create_universal_dependency_tree_ban
 
 void free_universal_dependency_tree_bank_features(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features);
 
-char* get_feature_value(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features, char* feature);
+char* get_feature_value(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features, const char* feature);
 
-bool feature_exists(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features, char* feature);
+bool feature_exists(Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features, const char* feature);
 
-int feature_index(char* feature_name);
+int feature_index(const char* feature_name);
 
-int dependency_index(char* universal_dependency);
+int dependency_index(const char* universal_dependency);
 
-int number_of_values(char* language, char* feature_name);
+int number_of_values(const char* language, const char* feature_name);
 
-int feature_value_index(char* language, char* feature_name, char* feature_value);
+int feature_value_index(const char* language, const char* feature_name, const char* feature_value);
 
-int pos_index(char* u_pos);
+int pos_index(const char* u_pos);
 
 char* get_pos_string(Universal_dependency_pos_type u_pos);
 
