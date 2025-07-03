@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include <StringUtils.h>
-#include <stdio.h>
 #include <Dictionary/Word.h>
 #include <printf.h>
 #include <string.h>
@@ -28,8 +27,10 @@ create_universal_dependency_tree_bank_sentence(const char* language, const char 
     Universal_dependency_tree_bank_sentence_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_sentence), "create_universal_dependency_tree_bank_sentence");
     result->words = create_array_list();
     result->comments = create_array_list();
+    result->splits = create_array_list();
     Array_list_ptr lines = str_split(sentence, '\n');
     Regular_expression_ptr expression = create_regular_expression("\\d+");
+    Regular_expression_ptr expression2 = create_regular_expression("\\d+\\-\\d+");
     for (int i = 0; i < lines->size; i++){
         char* line = array_list_get(lines, i);
         if (strlen(line) == 0){
@@ -61,12 +62,17 @@ create_universal_dependency_tree_bank_sentence(const char* language, const char 
                     char* misc = array_list_get(items, 9);
                     Universal_dependency_tree_bank_word_ptr word = create_universal_dependency_tree_bank_word(atoi(id), surface_form, lemma, upos, xpos, features, relation, deps, misc);
                     array_list_add(result->words, word);
+                } else {
+                    if (full_matches(expression2, id)) {
+                        array_list_add(result->splits, clone_string(id));
+                    }
                 }
             }
             free_array_list(items, free_);
         }
     }
     free_regular_expression(expression);
+    free_regular_expression(expression2);
     free_array_list(lines, free_);
     return result;
 }
@@ -78,6 +84,7 @@ create_universal_dependency_tree_bank_sentence(const char* language, const char 
 void free_universal_dependency_tree_bank_sentence(Universal_dependency_tree_bank_sentence_ptr sentence) {
     free_array_list(sentence->words, (void (*)(void *)) free_universal_dependency_tree_bank_word);
     free_array_list(sentence->comments, free_);
+    free_array_list(sentence->splits, free_);
     free_(sentence);
 }
 
@@ -99,4 +106,23 @@ Parser_evaluation_score_ptr compare_sentences(Universal_dependency_tree_bank_sen
         }
     }
     return score;
+}
+
+/**
+ * Returns number of splits in the sentence
+ * @param sentence Current sentence.
+ * @return Number of splits in the sentence
+ */
+int split_size_universal_dependency_tree_bank_sentence(Universal_dependency_tree_bank_sentence_ptr sentence) {
+    return sentence->splits->size;
+}
+
+/**
+ * Returns the split at position index
+ * @param sentence Current sentence.
+ * @param index Position
+ * @return The split at position index
+ */
+char * get_split_universal_dependency_tree_bank_sentence(Universal_dependency_tree_bank_sentence_ptr sentence, int index) {
+    return array_list_get(sentence->splits, index);
 }
