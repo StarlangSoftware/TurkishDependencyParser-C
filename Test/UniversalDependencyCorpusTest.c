@@ -29,13 +29,13 @@ int main(){
     Universal_dependency_tree_bank_corpus_ptr corpus = create_universal_dependency_tree_bank_corpus("tr_gb-ud-test.conllu");
     check_corpus(corpus, 2880, 17177, 371);
     free_universal_dependency_tree_bank_corpus(corpus);
-    corpus = create_universal_dependency_tree_bank_corpus("tr_imst-ud-dev.conllu");
+    corpus = create_universal_dependency_tree_bank_corpus("tr_imst2-ud-dev.conllu");
     check_corpus(corpus, 1100, 10542, 279);
     free_universal_dependency_tree_bank_corpus(corpus);
-    corpus = create_universal_dependency_tree_bank_corpus("tr_imst-ud-test.conllu");
+    corpus = create_universal_dependency_tree_bank_corpus("tr_imst2-ud-test.conllu");
     check_corpus(corpus, 1100, 10032, 278);
     free_universal_dependency_tree_bank_corpus(corpus);
-    corpus = create_universal_dependency_tree_bank_corpus("tr_imst-ud-train.conllu");
+    corpus = create_universal_dependency_tree_bank_corpus("tr_imst2-ud-train.conllu");
     check_corpus(corpus, 3435, 37522, 1082);
     free_universal_dependency_tree_bank_corpus(corpus);
     corpus = create_universal_dependency_tree_bank_corpus("tr_pud-ud-test.conllu");
