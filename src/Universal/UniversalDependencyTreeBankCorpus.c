@@ -16,7 +16,7 @@
  * @param file_name Input file name.
  */
 Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_corpus(const char *file_name) {
-    char sentence[MAX_LINE_LENGTH];
+    char sentence[MAX_LINE_LENGTH], sentence1[MAX_LINE_LENGTH];
     Universal_dependency_tree_bank_corpus_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_corpus), "create_universal_dependency_tree_bank_corpus");
     String_ptr st = substring(file_name, 0, str_find_c(file_name, "_"));
     result->language = str_copy(result->language, st->s);
@@ -31,7 +31,8 @@ Universal_dependency_tree_bank_corpus_ptr create_universal_dependency_tree_bank_
             array_list_add(result->sentences, tree_bank_sentence);
             sprintf(sentence, "");
         } else {
-            sprintf(sentence, "%s\n%s", sentence, line);
+            sprintf(sentence1, "%s\n%s", sentence, line);
+            strcpy(sentence, sentence1);
         }
     }
     free_array_list(lines, free_);
