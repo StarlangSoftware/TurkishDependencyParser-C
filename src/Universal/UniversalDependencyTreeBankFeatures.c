@@ -325,14 +325,15 @@ char *universal_dependency_tree_bank_features_to_string(
         result = str_copy(result, "_");
         return result;
     }
-    char tmp[MAX_LINE_LENGTH];
+    char tmp[MAX_LINE_LENGTH], tmp1[MAX_LINE_LENGTH];
     Array_list_ptr kv_list = key_value_list(universal_dependency_tree_bank_features->feature_list);
     for (int i = 0; i < kv_list->size; i++){
         Hash_node_ptr hash_node = array_list_get(kv_list, i);
         if (i == 0){
             sprintf(tmp, "%s=%s", (char*) hash_node->key, (char*) hash_node->value);
         } else {
-            sprintf(tmp, "%s|%s=%s", tmp, (char*) hash_node->key, (char*) hash_node->value);
+            sprintf(tmp1, "%s|%s=%s", tmp, (char*) hash_node->key, (char*) hash_node->value);
+            strcpy(tmp, tmp1);
         }
     }
     result = str_copy(result, tmp);
