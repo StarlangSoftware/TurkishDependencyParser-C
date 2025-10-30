@@ -14,7 +14,7 @@
  * @param dependency_type Type of the dependency relation in string form
  */
 Turkish_dependency_relation_ptr create_turkish_relation(int to_word, int to_IG, const char *dependency_type) {
-    Turkish_dependency_relation_ptr result = malloc_(sizeof(Turkish_dependency_relation), "create_turkish_relation");
+    Turkish_dependency_relation_ptr result = malloc_(sizeof(Turkish_dependency_relation));
     result->to_IG = to_IG;
     result->to_word = to_word;
     result->turkish_dependency_type = get_turkish_dependency_tag(dependency_type);

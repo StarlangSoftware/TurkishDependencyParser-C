@@ -28,7 +28,7 @@ create_universal_dependency_tree_bank_word(int id,
                                            Universal_dependency_relation_ptr relation,
                                            const char *deps,
                                            const char *misc) {
-    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "create_universal_dependency_tree_bank_word");
+    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word));
     result->id = id;
     result->name = str_copy(result->name, name);
     result->lemma = str_copy(result->lemma, lemma);
@@ -45,7 +45,7 @@ create_universal_dependency_tree_bank_word(int id,
  * Default constructor for the universal dependency word. Sets the attributes to default values.
  */
 Universal_dependency_tree_bank_word_ptr create_universal_dependency_tree_bank_word2() {
-    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "create_universal_dependency_tree_bank_word2");
+    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word));
     result->id = 0;
     result->name = NULL;
     result->lemma = NULL;
@@ -100,7 +100,7 @@ bool feature_exists2(Universal_dependency_tree_bank_word_ptr universal_dependenc
 
 Universal_dependency_tree_bank_word_ptr
 clone_universal_dependency_tree_bank_word(Universal_dependency_tree_bank_word_ptr universal_dependency_tree_bank_word) {
-    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word), "clone_universal_dependency_tree_bank_word");
+    Universal_dependency_tree_bank_word_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_word));
     result->id = universal_dependency_tree_bank_word->id;
     result->name = str_copy(result->name, universal_dependency_tree_bank_word->name);
     result->lemma = str_copy(result->lemma, universal_dependency_tree_bank_word->lemma);

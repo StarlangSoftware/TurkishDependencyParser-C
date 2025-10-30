@@ -14,7 +14,7 @@
  * @param word_node Xml parsed node containing information about a word.
  */
 Turkish_dependency_tree_bank_word_ptr create_turkish_dependency_tree_bank_word(Xml_element_ptr word_node) {
-    Turkish_dependency_tree_bank_word_ptr result = malloc_(sizeof(Turkish_dependency_tree_bank_word), "create_turkish_dependency_tree_bank_word");
+    Turkish_dependency_tree_bank_word_ptr result = malloc_(sizeof(Turkish_dependency_tree_bank_word));
     char* IG, *relation_name, *dependency_type;
     int to_word = 0, to_IG = 0;
     result->original_parses = create_array_list();

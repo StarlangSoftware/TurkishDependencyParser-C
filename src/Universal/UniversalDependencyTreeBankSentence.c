@@ -24,7 +24,7 @@
  */
 Universal_dependency_tree_bank_sentence_ptr
 create_universal_dependency_tree_bank_sentence(const char* language, const char *sentence) {
-    Universal_dependency_tree_bank_sentence_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_sentence), "create_universal_dependency_tree_bank_sentence");
+    Universal_dependency_tree_bank_sentence_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_sentence));
     result->words = create_array_list();
     result->comments = create_array_list();
     result->splits = create_array_list();

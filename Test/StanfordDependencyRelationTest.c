@@ -3,9 +3,12 @@
 //
 
 #include <stdio.h>
+#include <Memory/Memory.h>
+
 #include "../src/Stanford/StanfordDependencyRelation.h"
 
 int main(){
+    start_memory_check();
     if (get_stanford_dependency_tag("ACOMP") != ACOMP){
         printf("Error in tag ACOMP");
     }
@@ -18,4 +21,5 @@ int main(){
     if (get_stanford_dependency_tag("IOBJ") != IOBJ){
         printf("Error in tag IOBJ");
     }
+    end_memory_check();
 }

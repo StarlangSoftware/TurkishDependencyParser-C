@@ -3,9 +3,12 @@
 //
 
 #include <Corpus.h>
+#include <Memory/Memory.h>
+
 #include "../src/Turkish/TurkishDependencyTreeBankCorpus.h"
 
 int main(){
+    start_large_memory_check();
     Corpus_ptr corpus = create_turkish_dependency_tree_bank_corpus("metu-treebank.xml");
     if (corpus->sentences->size != 5635){
         printf("Error in sentence count %d\n", corpus->sentences->size);
@@ -19,4 +22,5 @@ int main(){
         printf("Error in word count %d\n", word_count);
     }
     free_turkish_dependency_tree_bank_corpus(corpus);
+    end_memory_check();
 }

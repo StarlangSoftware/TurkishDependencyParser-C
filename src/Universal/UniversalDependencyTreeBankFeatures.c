@@ -139,7 +139,7 @@ static int english_feature_values_size[25] = {10, 4, 1, 1, 1,
  */
 Universal_dependency_tree_bank_features_ptr
 create_universal_dependency_tree_bank_features(const char *features) {
-    Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features), "create_universal_dependency_tree_bank_features");
+    Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features));
     result->feature_list = create_string_hash_map();
     add_to_feature_list(result, features);
     return result;
@@ -342,7 +342,7 @@ char *universal_dependency_tree_bank_features_to_string(
 
 Universal_dependency_tree_bank_features_ptr clone_universal_dependency_tree_bank_features(
         Universal_dependency_tree_bank_features_ptr universal_dependency_tree_bank_features) {
-    Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features), "clone_universal_dependency_tree_bank_features");
+    Universal_dependency_tree_bank_features_ptr result = malloc_(sizeof(Universal_dependency_tree_bank_features));
     result->feature_list = create_string_hash_map();
     char* features = universal_dependency_tree_bank_features_to_string(universal_dependency_tree_bank_features);
     add_to_feature_list(result, features);

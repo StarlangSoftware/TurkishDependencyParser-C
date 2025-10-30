@@ -13,7 +13,7 @@
  * @param dependency_type Type of the dependency relation in string form
  */
 Stanford_dependency_relation_ptr create_stanford_relation(int to_word, const char *dependency_type) {
-    Stanford_dependency_relation_ptr result = malloc_(sizeof(Stanford_dependency_relation), "create_stanford_relation");
+    Stanford_dependency_relation_ptr result = malloc_(sizeof(Stanford_dependency_relation));
     result->to_word = to_word;
     result->stanford_dependency_type = get_stanford_dependency_tag(dependency_type);
     return result;

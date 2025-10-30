@@ -16,7 +16,7 @@
  */
 Universal_dependency_relation_ptr
 create_universal_dependency_relation(int to_word, const char* dependency_type) {
-    Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation), "create_universal_dependency_relation");
+    Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation));
     result->to_word = to_word;
     result->universal_dependency_type = get_universal_dependency_tag(dependency_type);
     return result;
@@ -27,7 +27,7 @@ create_universal_dependency_relation(int to_word, const char* dependency_type) {
  * @param to_word Index of the word in the sentence that dependency relation is related
  */
 Universal_dependency_relation_ptr create_universal_dependency_relation2(int to_word) {
-    Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation), "create_universal_dependency_relation2");
+    Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation));
     result->to_word = to_word;
     return result;
 }
@@ -86,7 +86,7 @@ compare_relations(Universal_dependency_relation_ptr relation1, Universal_depende
 }
 
 Universal_dependency_relation_ptr clone_universal_dependency_relation(Universal_dependency_relation_ptr relation) {
-    Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation), "clone_universal_dependency_relation");
+    Universal_dependency_relation_ptr result = malloc_(sizeof(Universal_dependency_relation));
     result->to_word = relation->to_word;
     result->universal_dependency_type = relation->universal_dependency_type;
     return result;
@@ -105,9 +105,9 @@ char *universal_dependency_relation_to_string(Universal_dependency_relation_ptr 
     for (int i = 0; i < 62; i++){
         if (relation->universal_dependency_type == universal_dependency_tags[i]){
             if (relation->to_word < 10){
-                result = malloc_((strlen(universal_dependency_types[i]) + 2) * sizeof(char), "universal_dependency_relation_to_string_1");
+                result = malloc_((strlen(universal_dependency_types[i]) + 2) * sizeof(char));
             } else {
-                result = malloc_((strlen(universal_dependency_types[i]) + 3) * sizeof(char), "universal_dependency_relation_to_string_2");
+                result = malloc_((strlen(universal_dependency_types[i]) + 3) * sizeof(char));
             }
             break;
         }

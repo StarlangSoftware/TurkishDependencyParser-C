@@ -3,9 +3,12 @@
 //
 
 #include <stdio.h>
+#include <Memory/Memory.h>
+
 #include "../src/Turkish/TurkishDependencyRelation.h"
 
 int main(){
+    start_memory_check();
     if (get_turkish_dependency_tag("subject") != SUBJECT){
         printf("Error in tag subject");
     }
@@ -15,4 +18,5 @@ int main(){
     if (get_turkish_dependency_tag("Relativizer") != RELATIVIZER){
         printf("Error in tag Relativizer");
     }
+    end_memory_check();
 }

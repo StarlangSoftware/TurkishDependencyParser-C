@@ -3,9 +3,12 @@
 //
 
 #include <stdio.h>
+#include <Memory/Memory.h>
+
 #include "../src/Universal/UniversalDependencyRelation.h"
 
 int main(){
+    start_memory_check();
     if (get_universal_dependency_pos_tag("adj") != ADJ){
         printf("Error in tag adj");
     }
@@ -27,4 +30,5 @@ int main(){
     if (get_universal_dependency_tag("fixed") != FIXED){
         printf("Error in tag fixed");
     }
+    end_memory_check();
 }
